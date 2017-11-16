@@ -1,0 +1,90 @@
+<controller ng-controller="carritoController as vm">
+    <div class="text-center">
+        <style>
+            h3 {
+                text-align: center;
+            }
+        </style>
+        <h3>Carrito!</h3>
+    </div>
+    <div class="row">
+        <center ng-if="!vm.carrito.length">
+            <h3>Carrito Vacio</h3>
+        </center>
+        <form ng-submit="vm.enviar(form_pedido)" name="form_pedido" role="form">
+            <div class="col s12 m6">
+                <p class="flow-text">Usuario</p>
+                <div class="col s6 m6">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">account_circle</i>
+                        <input placeholder="Nombre" id="first_name" type="text" value="{{vm.usuario}}" class="validate" readonly>
+                        <label for="first_name"></label>
+                    </div>
+                </div>
+                <div class="col s6 m6">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">phone</i>
+                        <input placeholder="Telefono" id="first_name" type="number" class="validate" ng-model="vm.post.numero">
+                        <label for="number"></label>
+                    </div>
+                </div>
+                <p class="flow-text">Datos De Envio</p>
+                <div class="col s12 m12">
+                    <div class="input-field col s8">
+                        <input placeholder="Calle" id="first_name" type="text" class="validate" ng-model="vm.post.direccion">
+                        <label for="address"></label>
+                    </div>
+                    <div class="input-field col s4">
+                        <input placeholder="Numero" id="first_name" type="text" class="validate" ng-model="vm.post.direccion">
+                        <label for="address"></label>
+                    </div>
+                    <div class="input-field col s12">
+                        <input placeholder="Colonia" id="first_name" type="text" class="validate" ng-model="vm.post.direccion">
+                        <label for="address"></label>
+                    </div>
+                </div>
+                <div class="col s12 m12">
+                    <div class="input-field col s12">
+                        <input placeholder="Nota" id="first_name" type="text" class="validate" ng-model="vm.post.comentario">
+                        <label for="Comentario"></label>
+                    </div>
+                </div>
+                <div class="col s12 m12 right-align">
+                    <button class="waves-effect waves-light btn">Colocar pedido</button>
+                </div>
+            </div>
+        </form>
+        
+        <div class="col s12 m6">
+            <table class="bordered striped" ng-if="vm.carrito.length">
+                <thead>
+                    <tr>
+                        <th>Cantidad</th>
+                        <th>Nombre</th>
+                        <th>Codigo</th>
+                        <th>Precio</th>
+                        <th></th>
+                    </tr>
+
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in vm.carrito">
+                        <td style="width: 100px;"><input type="number" min="0" ng-model="item.cantidad" ng-change="vm.actualizarcantidad(item)" ng-model-options="{updateOn: 'keyup click'}"></td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.descripcion}}</td>
+                        <td>{{item.precio | currency}}</td>
+                        <td><i class="fa fa-times fa-2x" style="color:red; cursor: pointer;" aria-hidden="true" ng-click="vm.borrar($index)"></i></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>Total</td>
+                        <td>{{vm.total | currency}}</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <a class="waves-effect waves-light btn" ui-sref="dashboard">Regresar</a>
+</controller>

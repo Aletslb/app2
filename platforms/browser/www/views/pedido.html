@@ -1,0 +1,69 @@
+<div ng-controller="pedidoController as vm"> 
+
+    <h2>Pedido #101</h2>
+    <hr>
+    <h2>Direccion De Envio</h2>
+    <table class="table stripped">
+        <thead>
+            <tr>
+                <th>nombre</th>
+                <th>telefono</th>
+                <th>direccion</th>
+                <th>notas</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{vm.data[0].cliente.name}}</td>
+                <td>{{vm.data[0].cliente.numero}}</td>
+                <td>{{vm.data[0].cliente.direccion}}</td>
+                <td>{{vm.data[0].cliente.notas}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <hr>
+    <h2>Productos</h2>
+    <table class="table stripped">
+        <thead>
+            <tr>
+                <th>Cantidad</th>
+                <th>Codigo</th>
+                <th>Descripcion</th>
+                <th>precio</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="producto in vm.data[0].pedido">
+                <td >
+                    {{producto.cantidad}}
+                </td>
+                <td>
+                    {{producto.name}}
+                </td>
+                <td>
+                    {{producto.descripcion}}
+                </td>
+                <td>
+                    {{producto.precio | currency}}
+                </td>
+                <td>
+                    {{producto.subtotal | currency}}
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                    Total
+                </td>
+                <td>
+                    {{vm.data[0].total | currency}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+
+</div>
